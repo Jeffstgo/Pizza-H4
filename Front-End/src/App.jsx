@@ -1,52 +1,33 @@
-import React, { useState } from "react";
-import Navbar from "./Navbar";
-import Home from "./Home";
-import Footer from "./Footer";
-import RegisterPage from "./RegisterPage";
-import LoginPage from "./LoginPage";
-import Cart from "./Cart";
-import pizzas from "./assets/data/pizzas";
-import Pizza from "./Pizza"; 
-// App component 
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { CartProvider } from "./context/CartContext";
+import Navbar from "./components/Navbar";
+import Home from "./pages/Home";
+import Pizza from "./pages/Pizza";
+import Cart from "./pages/Cart";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import Footer from "./components/Footer";
+import Header from "./components/Header";
+
 
 function App() {
- 
-  const [cart, setCart] = useState(pizzas.map((pizza) => ({ ...pizza, cantidad: 1 })));
-
-
-  const increaseQuantity = (id) => {
-    setCart(
-      cart.map((pizza) =>
-        pizza.id === id ? { ...pizza, cantidad: pizza.cantidad + 1 } : pizza
-      )
-    );
-  };
-
-
-  const decreaseQuantity = (id) => {
-    const newCart = cart
-      .map((pizza) =>
-        pizza.id === id ? { ...pizza, cantidad: pizza.cantidad - 1 } : pizza
-      )
-      .filter((pizza) => pizza.cantidad > 0); 
-
-    setCart(newCart);
-  };
-
   return (
-    <div>
-      <Navbar cart={cart} />
-      <Home />
-      <Pizza />
-      {/* { <RegisterPage /> } */}
-      {/* <LoginPage /> */}
-      {/* {<Cart
-        cart={cart}
-        increaseQuantity={increaseQuantity}
-        decreaseQuantity={decreaseQuantity}
-      />} */}
-      <Footer />
-    </div>
+    <CartProvider>
+      <Router>
+        <Navbar />
+        <Header />
+        <div className="container mt-4">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/pizza/:id" element={<Pizza />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
+          </Routes>
+        </div>
+        <Footer />
+      </Router>
+    </CartProvider>
   );
 }
 
