@@ -9,7 +9,7 @@ const Navbar = () => {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const dropdownRef = useRef(null);
 
-  // Cerrar dropdown al hacer clic fuera
+  
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -23,13 +23,13 @@ const Navbar = () => {
     };
   }, []);
 
-  // Manejar el toggle del dropdown
+
   const handleDropdownToggle = (e) => {
-    e.stopPropagation(); // Evitar propagación del evento
+    e.stopPropagation();
     setShowDropdown(!showDropdown);
   };
 
-  // Cerrar dropdown al seleccionar una opción
+  
   const closeDropdown = () => {
     setShowDropdown(false);
     setShowMobileMenu(false);
@@ -42,7 +42,7 @@ const Navbar = () => {
           Pizzería Mamma Mia
         </Link>
 
-        {/* Botón móvil */}
+       
         <button
           className="navbar-toggler"
           type="button"
@@ -52,7 +52,7 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Menú principal */}
+        
         <div
           className={`collapse navbar-collapse ${showMobileMenu ? "show" : ""}`}
           id="navbarContent"
@@ -62,7 +62,7 @@ const Navbar = () => {
               🍕 Home
             </Link>
 
-            {/* Dropdown mejorado */}
+           
             <div className="dropdown position-relative" ref={dropdownRef}>
               <button
                 className="btn btn-success dropdown-toggle"
@@ -110,7 +110,7 @@ const Navbar = () => {
               </ul>
             </div>
 
-            {/* Resto de botones */}
+            
             {isLoggedIn ? (
               <>
                 <Link
