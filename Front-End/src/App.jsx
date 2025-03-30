@@ -8,6 +8,8 @@ import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import Profile from "./pages/Profile";
+import NotFound from "./pages/NotFound";
 
 
 function App() {
@@ -19,10 +21,13 @@ function App() {
         <div className="container mt-4">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/pizza/:id" element={<Pizza />} />
-            <Route path="/cart" element={<Cart />} />
+            <Route path="/Register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/pizza/:id" element={<Pizza />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/404" element={<NotFound />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
         <Footer />
